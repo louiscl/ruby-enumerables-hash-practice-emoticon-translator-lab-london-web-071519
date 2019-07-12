@@ -1,9 +1,7 @@
-# require modules here
 require "yaml"
 
-
-def load_library(file_path)
-  emoticons = YAML.load_file(file_path)
+def load_library(file)
+  emoticons = YAML.load_file(file)
 
   new_hash = {
     'get_meaning' => {},
@@ -19,12 +17,12 @@ def load_library(file_path)
 end
 
 
-def get_japanese_emoticon(file_path, emoticon)
-  result = load_library(file_path)['get_emoticon'][emoticon]
+def get_japanese_emoticon(file, emoticon)
+  result = load_library(file)['get_emoticon'][emoticon]
   result ? result : "Sorry, that emoticon was not found"
 end
 
-def get_english_meaning(file_path, emoticon)
-  result = load_library(file_path)['get_meaning'][emoticon]
+def get_english_meaning(file, emoticon)
+  result = load_library(file)['get_meaning'][emoticon]
   result ? result : "Sorry, that emoticon was not found"
 end 
