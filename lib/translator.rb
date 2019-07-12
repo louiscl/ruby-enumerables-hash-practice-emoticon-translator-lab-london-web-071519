@@ -1,33 +1,30 @@
-require "yaml" # require modules here
+# require modules here
+require "yaml"
 
-def load_library(x)
-  Hash.new(YAML.load_file(x))
-end
 
-def get_japanese_emoticon
-  # code goes here
-end
+def load_library(file_path)
+  emoticons = YAML.load_file(file_path)
 
-def get_english_meaning
-  # code goes here
-end
-
-test = {
-  :angel => ["O:)", ":("],
-  :angry => [">:(", ":)"]
+  new_hash = {
+    'get_meaning' => {},
+    'get_emoticon' => {}
   }
 
-
-
-def translator(test)
-  puts "Please enter the emoticon that you'd like translate"
-  input = gets.chomp
-  input2 = gets.downcase.chomp
-  test.each do |emotion, emoticons|
-    if emoticons.first == input
-      puts "Here is the Japanese version of your emoticon:   #{emoticons.last}"
-    end
+  emoticons.each do |key,value|
+    new_hash['get_emoticon'][value[0]] = emoticons[key][1]
+    new_hash['get_meaning'][value[1]] = key
   end
+
+  new_hash
 end
 
-translator(test)
+
+def get_japanese_emoticon(file_path, emoticon)
+  result = load_library(file_path)['get_emoticon'][emoticon]
+  result ? result : "Sorry, that emoticon was not found"
+end
+
+def get_english_meaning(file_path, emoticon)
+  result = load_library(file_path)['get_meaning'][emoticon]
+  result ? result : "Sorry, that emoticon was not found"
+end 
