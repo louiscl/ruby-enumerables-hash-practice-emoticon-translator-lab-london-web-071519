@@ -8,21 +8,20 @@ def load_library(file)
     'get_emoticon' => {}
   }
 
-  emoticons.each do |key,value|
-    new_hash['get_emoticon'][value[0]] = emoticons[key][1]
-    new_hash['get_meaning'][value[1]] = key
+  emoticons.each do |key,val|
+    new_hash['get_emoticon'][val[0]] = emoticons[key][1]
+    new_hash['get_meaning'][val[1]] = key
   end
-
   new_hash
 end
 
 
-def get_japanese_emoticon(file, emoticon)
-  result = load_library(file)['get_emoticon'][emoticon]
+def get_japanese_emoticon(file, emot)
+  result = load_library(file)['get_emoticon'][emot]
   result ? result : "Sorry, that emoticon was not found"
 end
 
-def get_english_meaning(file, emoticon)
-  result = load_library(file)['get_meaning'][emoticon]
+def get_english_meaning(file, emot)
+  result = load_library(file)['get_meaning'][emot]
   result ? result : "Sorry, that emoticon was not found"
 end 
